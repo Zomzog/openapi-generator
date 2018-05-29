@@ -75,6 +75,7 @@ public class KotlinServerCodegen extends AbstractKotlinCodegen {
         modelPackage = packageName + ".models";
 
         supportedLibraries.put("ktor", "ktor framework");
+        supportedLibraries.put("springboot", "SpringBoot framework");
 
         // TODO: Configurable server engine. Defaults to netty in build.gradle.
         CliOption library = new CliOption(CodegenConstants.LIBRARY, "library template (sub-template) to use");
