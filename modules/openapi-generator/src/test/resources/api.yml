@@ -1,0 +1,111 @@
+---
+openapi: "3.0.1"
+info:
+  title: "My Little Pony"
+  description: "Friendship is magic"
+  contact: {}
+  version: "1.0.0"
+paths:
+  /ponies:
+    summary: "Everything for ponies"
+    get:
+      summary: "List"
+      operationId: "list"
+      parameters:
+        - name: "name"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+          example: "Rainbow Dash"
+      responses:
+        200:
+          description: "Status 200"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Pony"
+        400:
+          description: "Status 400"
+    post:
+      summary: "Create"
+      operationId: "create"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pony"
+      responses:
+        201:
+          description: "Status 201"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pony"
+        400:
+          description: "Status 400"
+  /ponies/{ponyId}:
+    get:
+      summary: "Get one"
+      operationId: "getOne"
+      responses:
+        200:
+          description: "Status 200"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pony"
+    put:
+      summary: "Update"
+      operationId: "update"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pony"
+      responses:
+        200:
+          description: "Status 200"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pony"
+    delete:
+      summary: "Delete one"
+      operationId: "deleteOne"
+      responses:
+        200:
+          description: "Status 200"
+    parameters:
+      - name: "ponyId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+components:
+  schemas:
+    Pony:
+      type: "object"
+      required:
+        - "Color"
+        - "Name"
+      properties:
+        Id:
+          type: "string"
+        Name:
+          type: "string"
+          minLength: 1
+          maxLength: 100
+          example: "Big McIntosh"
+        Color:
+          type: "string"
+          enum:
+            - "RED"
+            - "RAINBOW"
+            - "BLUE"
+        CreatedAt:
+          type: "integer"
+          format: "int64"
+          description: "Timestamp"

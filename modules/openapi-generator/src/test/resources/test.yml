@@ -1,0 +1,36 @@
+openapi: "3.0.2"
+
+info:
+  version: "1.0.0"
+  title: Testing Kotlin generation
+
+# We only care about schemas, but this prevents codegen error: "attribute paths is missing"
+paths:
+  /dummy:
+    get:
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+
+    TestRec:
+      properties:
+        id:
+          type: integer
+          description: >
+            Unique id.
+          minLength: 1
+          example: 1
+        label:
+          type: string
+          description: >
+            User-friendly name.
+          example: "North"
+        userId:
+          type: string
+          description: >
+            User Id.
+          minLength: 38
+          example: "Test1234"
