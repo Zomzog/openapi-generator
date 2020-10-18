@@ -1,0 +1,42 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Abstract Generation problem",
+    "description": "Abstract Generation problem",
+    "version": "1.0.0-SNAPSHOT"
+  },
+  "servers": [],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "Pet": {
+        "title": "AbstractPet",
+        "type": "object",
+        "description": "model containing all the details of a pet",
+        "discriminator": {
+          "propertyName": "petTypeName"
+        }
+      },
+      "Dog": {
+        "title": "DogDetails",
+        "description": "The model containing the details of the dog",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          },
+          {
+            "title": "DogDetails",
+            "type": "object",
+            "properties": {
+              "legs": {
+                "type": "string",
+                "description": "the number of legs"
+              }
+            },
+            "description": "The model containing the details of the dog"
+          }
+        ]
+      }
+    }
+  }
+}

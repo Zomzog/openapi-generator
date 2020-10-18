@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Pony
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /pony:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: hey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pony'
+      operationId: get-pony
+      parameters:
+        - $ref: '#/components/parameters/IPony'
+components:
+  parameters:
+    IPony:
+      name: IPony
+      in: query
+      description: yolo
+      schema:
+        type: object
+        properties:
+          badPony:
+            type: string
+
+  schemas:
+    Pony:
+      title: Pony
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            friends:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: '#/components/schemas/Pony'
+          required:
+            - friends
+        - $ref: '#/components/schemas/IPony'
+    IPony:
+      title: IPony
+      type: object
+  responses:
+    DEMO:
+      description: YOLO
+      content:
+        application/json:
+          schema:
+            title: FOUK
+            type: object
+            properties:
+              badPonyProperty:
+                type: string
